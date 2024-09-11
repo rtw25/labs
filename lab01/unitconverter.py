@@ -38,4 +38,4 @@ else:
 
 roundedConvertedValue = f"{convertedValue:.2f}"
 
-print(roundedConvertedValue, convertedUnit)
+print(value, unit, "=", roundedConvertedValue, convertedUnit)
