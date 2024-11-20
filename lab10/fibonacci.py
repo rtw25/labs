@@ -1,7 +1,5 @@
-# Write your code here :-)
-# Task 2: Fibonacci with Memoization
 
-# Memoization decorator
+# memoization decorator
 def memoize(f):
     cache = {}
     def wrapper(n):
@@ -10,7 +8,7 @@ def memoize(f):
         return cache[n]
     return wrapper
 
-# Recursive Fibonacci with memoization
+# recursive fibonacci with memoization
 @memoize
 def recur_fibo(n):
     if n <= 1:
@@ -18,19 +16,19 @@ def recur_fibo(n):
     else:
         return recur_fibo(n - 1) + recur_fibo(n - 2)
 
-# Standard recursive Fibonacci (without memoization)
+# standard recursive Fibonacci
 def standard_fibo(n):
     if n <= 1:
         return n
     else:
         return standard_fibo(n - 1) + standard_fibo(n - 2)
 
-# Main Program for Task 2
+# main program
 if __name__ == "__main__":
-    # Speed test for Fibonacci computation
+    # speed test for Fibonacci computation
     import time
 
-    # Compare speed of both implementations for n = 35
+    # compare speed of both implementations for n = 35
     start_time = time.time()
     print(f"Fibonacci (standard) of 35: {standard_fibo(35)}")
     print(f"Time taken for standard Fibonacci: {time.time() - start_time:.6f} seconds")

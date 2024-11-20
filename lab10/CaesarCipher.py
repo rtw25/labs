@@ -1,6 +1,5 @@
-# Task 1: Caesar Cipher (Functional Programming)
 
-# Function to encrypt text
+# function to encrypt text
 def encrypt(plaintext, key):
     ciphertext = ''
     for char in plaintext:
@@ -18,7 +17,7 @@ def encrypt(plaintext, key):
             ciphertext += chr(shifted)
     return ciphertext
 
-# Function to decrypt text
+# function to decrypt text
 def decrypt(ciphertext, key):
     plaintext = ''
     for char in ciphertext:
@@ -36,9 +35,9 @@ def decrypt(ciphertext, key):
             plaintext += chr(shifted)
     return plaintext
 
-# Example Usage for Task 1
+# example usage
 if __name__ == "__main__":
-    # Test the Caesar Cipher functions
+    # test the functions
     key = 3
     encrypted_text = encrypt("hello WORLD!", key)
     decrypted_text = decrypt(encrypted_text, key)
