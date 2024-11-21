@@ -42,7 +42,7 @@ if __name__ == "__main__":
     encrypted_text = encrypt("hello WORLD!", key)
     decrypted_text = decrypt(encrypted_text, key)
 
-    print(f"Task 1: Caesar Cipher")
+
     print(f"Encrypted: {encrypted_text}")
     print(f"Decrypted: {decrypted_text}")
 
