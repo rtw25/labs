@@ -2,30 +2,30 @@ import ast
 import os
 import re
 
-# Function to find the file in the parent directory or its subdirectories
+# function to find the file in the parent directory or its subdirectories
 def find_file(filename, root_directory):
     for dirpath, _, filenames in os.walk(root_directory):
         if filename in filenames:
             return os.path.join(dirpath, filename)
     raise FileNotFoundError(f"{filename} not found in {root_directory} or its subdirectories.")
 
-# Function to generate the report
+# function to generate the report
 def generate_report(filename, output_dir):
-    # Automatically set the root directory to the parent directory of the current working directory
+    # automatically set the root directory to the parent directory of the current working directory
     root_directory = os.path.abspath(os.path.join(os.getcwd(), os.pardir))
     
-    # Search for the file in the parent directory
+    # search for the file in the parent directory
     filepath = find_file(filename, root_directory)
     
-    # Read the Python file and parse its AST
+    # read the Python file and parse its AST
     with open(filepath, 'r') as file:
         source_code = file.read()
     tree = ast.parse(source_code)
     
-    # Prepare the report
+    # prepare the report
     report_lines = []
 
-    # File structure
+    # file structure
     total_lines, imports, classes, functions = check_file_structure(filepath)
     report_lines.append("File Structure:")
     report_lines.append(f"Total lines of code: {total_lines}")
@@ -34,22 +34,22 @@ def generate_report(filename, output_dir):
     report_lines.append(f"Functions: {functions}")
     report_lines.append("\n")
 
-    # Docstring Check
+    # docstring check
     report_lines.append("Doc String Check:")
     report_lines.extend(check_docstrings(tree))
     report_lines.append("\n")
 
-    # Type Annotation Check
+    # type annotation Check
     report_lines.append("Type Annotation Check:")
     report_lines.extend(check_type_annotations(tree))
     report_lines.append("\n")
 
-    # Naming Convention Check
+    # naming convention Check
     report_lines.append("Naming Convention Check:")
     report_lines.extend(check_naming_conventions(tree))
     report_lines.append("\n")
 
-    # Write the report to the output directory
+    # write the report to the output directory
     os.makedirs(output_dir, exist_ok=True)
     report_filename = os.path.join(output_dir, f"style_report_{filename}.txt")
     with open(report_filename, 'w') as report_file:
@@ -57,7 +57,7 @@ def generate_report(filename, output_dir):
     
     print(f"Style report generated: {report_filename}")
 
-# Check file structure (total lines, imports, classes, functions)
+# check file structure (total lines, imports, classes, functions)
 def check_file_structure(filepath):
     total_lines = 0
     imports = []
@@ -79,7 +79,7 @@ def check_file_structure(filepath):
     
     return total_lines, imports, classes, functions
 
-# Check for docstrings in classes and functions
+# check for docstrings in classes and functions
 def check_docstrings(tree):
     report = []
     for node in ast.walk(tree):
@@ -92,7 +92,7 @@ def check_docstrings(tree):
                 report.append(f"{name}: DocString not found")
     return report
 
-# Check if all functions and methods have type annotations
+# check if all functions and methods have type annotations
 def check_type_annotations(tree):
     report = []
     missing_annotations = []
@@ -108,7 +108,7 @@ def check_type_annotations(tree):
     
     return report
 
-# Check naming conventions for classes and functions
+# check naming conventions for classes and functions
 def check_naming_conventions(tree):
     report = []
     invalid_class_names = []
@@ -134,13 +134,13 @@ def check_naming_conventions(tree):
     
     return report
 
-# Main function to execute the program
+# main function to execute the program
 if __name__ == "__main__":
-    # Get the filename from user input
+    # get the filename from user input
     filename = input("Enter the Python file to check (e.g., 'my_file.py'): ").strip()
     
-    # Define the output directory where the report will be saved
+    # define the output directory where the report will be saved
     output_dir = os.path.dirname(os.path.abspath(__file__))  # Save the report in the same directory as the script
     
-    # Generate the report
+    # generate the report
     generate_report(filename, output_dir)
